@@ -1,6 +1,6 @@
-import datetime, json
+import datetime, json, uuid
 import pandas as pd
-# =====================================================================================
+
 class Note:
     def __init__(self, note_id, title, content):
         self.id = note_id
@@ -24,7 +24,8 @@ class NotesManagement:
 
         title = input("Введите заголовок заметки: ")
         content = input("Введите содержимое заметки: ")
-        note = Note( len(notes) + 1, title, content)
+        note_id = uuid.uuid4()
+        note = Note( note_id, title, content)
         notes.append(note)
 
         with open(self.notes_file, 'w') as file:
@@ -139,16 +140,3 @@ class NotesManagement:
                 break
             else:
                 print('некорректный выбор')
-
-#=====================================================================================================
-
-
-
-
-
-
-
-
-
-
-

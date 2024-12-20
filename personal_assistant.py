@@ -1,5 +1,5 @@
-from .classes import *
-
+from .Note import NotesManagement
+from .Task import TasksManagement
 Notes = NotesManagement("notes.json")
 
 def manage_tasks():
