@@ -1,4 +1,6 @@
-from ./classes import *
+from .classes import *
+
+Notes = NotesManagement("notes.json")
 
 def manage_tasks():
     return
@@ -23,7 +25,7 @@ while True:
 6. Выход""")
     choice = int(input())
     if choice == 1:
-        Note.manage_notes()
+        Notes.manage_notes()
     elif choice == 2:
         manage_tasks()
     elif choice == 3:

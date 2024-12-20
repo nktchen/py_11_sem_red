@@ -1,12 +1,16 @@
 import datetime, json
 import pandas as pd
+# =====================================================================================
 class Note:
     def __init__(self, note_id, title, content):
         self.id = note_id
         self.title = title
         self.content = content
         self.timestamp = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-        self.notes_file = "notes.json"
+
+class NotesManagement:
+    def __init__(self, notes_file):
+        self.notes_file = notes_file
 
     def load_notes(self):
         try:
@@ -119,9 +123,11 @@ class Note:
                 note_id = int(input())
                 self.view_content(note_id)
             elif choice == 4:
+                print('введите ID заметки')
                 note_id = int(input())
                 self.edit_note(note_id)
             elif choice == 5:
+                print('введите ID заметки')
                 note_id = int(input())
                 self.delete_note(note_id)
             elif choice == 6:
@@ -133,6 +139,11 @@ class Note:
                 break
             else:
                 print('некорректный выбор')
+
+#=====================================================================================================
+
+
+
 
 
 
