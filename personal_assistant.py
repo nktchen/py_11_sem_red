@@ -1,0 +1,44 @@
+from ./classes import *
+
+def manage_tasks():
+    return
+
+def manage_contacts():
+    return
+
+def manage_finances():
+    return
+
+def calculator():
+    return
+
+while True:
+    print("""Добро пожаловать в Персональный помощник!
+Выберите действие:
+1. Управление заметками
+2. Управление задачами
+3. Управление контактами
+4. Управление финансовыми записями
+5. Калькулятор
+6. Выход""")
+    choice = int(input())
+    if choice == 1:
+        Note.manage_notes()
+    elif choice == 2:
+        manage_tasks()
+    elif choice == 3:
+        manage_contacts()
+    elif choice == 4:
+        manage_finances()
+    elif choice == 5:
+        calculator()
+    elif choice == 6:
+        print('выход из программы')
+        break
+    else:
+        print('некорректный выбор')
+
+
+
+
+
