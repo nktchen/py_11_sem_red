@@ -95,7 +95,6 @@ class ContactsManagement:
 
         print('Не найдена Контакт с таким ID!')
 
-
     def delete_contact(self, contact_id):
         contacts = self.load_contacts()
 
@@ -109,8 +108,6 @@ class ContactsManagement:
 
         print('Не найдена Контакт с таким ID!')
 
-
-
     def export_csv(self):
         try:
             contacts_df = pd.read_json(self.contacts_file)
@@ -118,8 +115,6 @@ class ContactsManagement:
             print("контакты экспортированы в contacts.csv.")
         except FileNotFoundError:
             print(f"Файл {self.contacts_file} не найден, сначала сздайте хотя бы одну контакт...")
-
-
 
     def import_csv(self):
         try:
