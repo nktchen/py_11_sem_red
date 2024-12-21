@@ -2,13 +2,23 @@ import datetime, json, uuid
 import pandas as pd
 
 class Task:
-    def __init__(self, task_id, title, description, priority, due_date):
-        self.id = task_id
+    def __init__(self, id, title, description, priority, due_date, done = False):
+        self.id = id
         self.title = title
         self.description = description
-        self.done = False
         self.priority = priority
         self.due_date = due_date
+        self.done = done
+
+    def __dict__(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "priority": self.priority,
+            "due_date": self.due_date,
+            "done": self.done,
+        }
 
 class TasksManagement:
     def __init__(self, tasks_file):
@@ -17,20 +27,22 @@ class TasksManagement:
     def load_tasks(self):
         try:
             with open(self.tasks_file) as f:
-                return json.load(f)
+                json_loaded =  json.load(f)
+                return [Task(**task) for task in json_loaded]
         except FileNotFoundError:
             return []
 
     def save_tasks(self, tasks):
+        dict_tasks = []
+        for task in tasks:
+            dict_tasks.append(task.__dict__())
         with open(self.tasks_file, 'w') as file:
-            json.dump(tasks, file)
-
-
+            json.dump(dict_tasks, file)
 
     def create_task(self):
         tasks = self.load_tasks()
 
-        task_id = uuid.uuid4()
+        task_id = str(uuid.uuid4())
         title = input("Введите заголовок задачи: ")
         description = input("Введите описание задачи: ")
         priority = input("Введите приоритет - 'Высокий/средний/низкий': ")
@@ -47,7 +59,7 @@ class TasksManagement:
 
         if tasks:
             for task in tasks:
-                print(f'Название: {task.title}, Статус: {task.done}, Приоритет: {task.priority}, Срок: {task.due_date}') #TODO - сделать стрип
+                print(f'Название: {task.title}, Статус: {task.done}, Приоритет: {task.priority}, Срок: {task.due_date},  ID: {task.id}')
         else:
             print('Нет задач!')
 
@@ -59,7 +71,7 @@ class TasksManagement:
                 task.done = True
                 self.save_tasks(tasks)
                 print("Задача успешно изменена.")
-                break
+                return
 
         print('Не найдена Задача с таким ID!')
 
@@ -78,14 +90,14 @@ class TasksManagement:
                 print("Введите новую дату окончания 'ДД-ММ-ГГГГ' задачи, оставьте пустым, чтобы оставить прежнее: ")
                 due_date = input()
 
-                task.title = title if title else 0
-                task.description = description if description else 0
-                task.priority = priority if priority else 0
-                task.due_date = due_date if due_date else 0
+                task.title = title if title else task.title
+                task.description = description if description else task.description
+                task.priority = priority if priority else task.priority
+                task.due_date = due_date if due_date else task.due_date
 
                 self.save_tasks(tasks)
                 print("Задача успешно изменена.")
-                break
+                return
 
         print('Не найдена Задача с таким ID!')
 
@@ -99,21 +111,26 @@ class TasksManagement:
 
                 self.save_tasks(tasks)
                 print("Задача успешно удалена.")
-                break
+                return
 
         print('Не найдена Задача с таким ID!')
 
 
 
     def export_csv(self):
-        tasks_df = pd.read_json(self.tasks_file)
-        tasks_df.to_csv('tasks.csv', index=False) #TODO прочитать че это все значит
-        print("задачи экспортированы в tasks.csv.")
+        try:
+            tasks_df = pd.read_json(self.tasks_file)
+            tasks_df.to_csv('tasks.csv', index=False)
+            print("задачи экспортированы в tasks.csv.")
+        except FileNotFoundError:
+            print(f"Файл {self.tasks_file} не найден, сначала сздайте хотя бы одну таску...")
+
+
 
     def import_csv(self):
         try:
             tasks_df = pd.read_csv('tasks.csv')
-            tasks_df.to_json(self.tasks_file, orient='records', lines=True) #TODO прочитать че это все значит
+            tasks_df.to_json(self.tasks_file, orient='records')
             print("задачи импортированы из tasks.csv.")
         except FileNotFoundError:
             print("Файл tasks.csv не найден.")
@@ -121,14 +138,14 @@ class TasksManagement:
     def manage_tasks(self):
         while True:
             print("""Управление Задачами:
-        1. Создать новую задачу
-        2. Просмотреть список задач
-        3. Выполнить задачу
-        4. Редактировать задачу
-        5. Удалить задачу
-        6. Экспорт задач в CSV
-        7. Импорт задач из CSV
-        8. Назад""")
+    1. Создать новую задачу
+    2. Просмотреть список задач
+    3. Выполнить задачу
+    4. Редактировать задачу
+    5. Удалить задачу
+    6. Экспорт задач в CSV
+    7. Импорт задач из CSV
+    8. Назад""")
             choice = int(input())
             if choice == 1:
                 self.create_task()
@@ -136,15 +153,15 @@ class TasksManagement:
                 self.view_tasks()
             elif choice == 3:
                 print('введите ID задачи')
-                task_id = int(input())
+                task_id = input()
                 self.complete_task(task_id)
             elif choice == 4:
                 print('введите ID задачи')
-                task_id = int(input())
+                task_id = input()
                 self.edit_task(task_id)
             elif choice == 5:
                 print('введите ID задачи')
-                task_id = int(input())
+                task_id = input()
                 self.delete_task(task_id)
             elif choice == 6:
                 self.export_csv()

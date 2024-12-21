@@ -1,9 +1,8 @@
-from .Note import NotesManagement
-from .Task import TasksManagement
-Notes = NotesManagement("notes.json")
+from classes.Note import NotesManagement
+from classes.Task import TasksManagement
 
-def manage_tasks():
-    return
+Notes = NotesManagement("notes.json")
+Tasks = TasksManagement("tasks.json")
 
 def manage_contacts():
     return
@@ -16,18 +15,18 @@ def calculator():
 
 while True:
     print("""Добро пожаловать в Персональный помощник!
-Выберите действие:
-1. Управление заметками
-2. Управление задачами
-3. Управление контактами
-4. Управление финансовыми записями
-5. Калькулятор
-6. Выход""")
+    Выберите действие:
+    1. Управление заметками
+    2. Управление задачами
+    3. Управление контактами
+    4. Управление финансовыми записями
+    5. Калькулятор
+    6. Выход""")
     choice = int(input())
     if choice == 1:
         Notes.manage_notes()
     elif choice == 2:
-        manage_tasks()
+        Tasks.manage_tasks()
     elif choice == 3:
         manage_contacts()
     elif choice == 4:
