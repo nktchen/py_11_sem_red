@@ -55,8 +55,8 @@ class FinancesManagement:
 
         if finances:
             print('выберите тип фильтрации: 1 - по дате, 2 - по категории, нет выбора - без филтрации')
-            choice = int(input())
-            if choice == 1:
+            choice = input()
+            if choice == '1':
                 print('введите день в формате "ДД-ММ-ГГГГ"')
                 search_date = input()
                 for finance in finances:
@@ -64,7 +64,7 @@ class FinancesManagement:
                         print(
                             f'сумма операции: {finance.amount}, категория операции: {finance.category}, дата операции: {finance.date}, описание операции: {finance.description},  ID: {finance.id}')
             
-            if choice == 2:
+            if choice == '2':
                 print('введите категорию для поиска')
                 search_category = input()
                 for finance in finances:
@@ -115,18 +115,18 @@ class FinancesManagement:
            5. Экспорт финансовых записей в формате CSV.
            6. Назад""")
 
-            choice = int(input())
-            if choice == 1:
+            choice = input()
+            if choice == '1':
                 self.create_finance()
-            elif choice == 2:
+            elif choice == '2':
                 self.view_finances()
-            elif choice == 3:
+            elif choice == '3':
                 self.generate_summary()
-            elif choice == 4:
+            elif choice == '4':
                 self.import_csv()
-            elif choice == 5:
+            elif choice == '5':
                 self.export_csv()
-            elif choice == 6:
+            elif choice == '6':
                 print('выход из программы')
                 break
             else:

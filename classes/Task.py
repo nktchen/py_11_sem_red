@@ -145,27 +145,27 @@ class TasksManagement:
     7. Импорт задач из CSV
     8. Назад""")
             choice = int(input())
-            if choice == 1:
+            if choice == '1':
                 self.create_task()
-            elif choice == 2:
+            elif choice == '2':
                 self.view_tasks()
-            elif choice == 3:
+            elif choice == '3':
                 print('введите ID задачи')
                 task_id = input()
                 self.complete_task(task_id)
-            elif choice == 4:
+            elif choice == '4':
                 print('введите ID задачи')
                 task_id = input()
                 self.edit_task(task_id)
-            elif choice == 5:
+            elif choice == '5':
                 print('введите ID задачи')
                 task_id = input()
                 self.delete_task(task_id)
-            elif choice == 6:
+            elif choice == '6':
                 self.export_csv()
-            elif choice == 7:
+            elif choice == '7':
                 self.import_csv()
-            elif choice == 8:
+            elif choice == '8':
                 print('выход из программы')
                 break
             else:

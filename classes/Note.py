@@ -124,28 +124,28 @@ class NotesManagement:
     6. Экспорт заметок в CSV
     7. Импорт заметок из CSV
     8. Назад""")
-            choice = int(input())
-            if choice == 1:
+            choice = input()
+            if choice == '1':
                 self.create_note()
-            elif choice == 2:
+            elif choice == '2':
                 self.view_notes()
-            elif choice == 3:
+            elif choice == '3':
                 print('введите ID заметки')
                 note_id = input()
                 self.view_content(note_id)
-            elif choice == 4:
+            elif choice == '4':
                 print('введите ID заметки')
                 note_id = input()
                 self.edit_note(note_id)
-            elif choice == 5:
+            elif choice == '5':
                 print('введите ID заметки')
                 note_id = input()
                 self.delete_note(note_id)
-            elif choice == 6:
+            elif choice == '6':
                 self.export_csv()
-            elif choice == 7:
+            elif choice == '7':
                 self.import_csv()
-            elif choice == 8:
+            elif choice == '8':
                 print('выход из программы')
                 break
             else:

@@ -51,8 +51,8 @@ class ContactsManagement:
     def find_contact(self):
         contacts = self.load_contacts()
         print('выберите тип поиска: 1 - по номеру, 2 - по имени')
-        choice = int(input())
-        if choice == 1:
+        choice = input()
+        if choice == '1':
             print('введите номер')
             phone_search = input()
             for contact in contacts:
@@ -61,7 +61,7 @@ class ContactsManagement:
                     print('изменено')
                     return
             print('не найдено')
-        elif choice == 2:
+        elif choice == '2':
             print('введите имя')
             name_search = input()
             for contact in contacts:
@@ -134,24 +134,24 @@ class ContactsManagement:
     5. Экспорт контактов в CSV
     6. Импорт контактов из CSV
     7. Назад""")
-            choice = int(input())
-            if choice == 1:
+            choice = input()
+            if choice == '1':
                 self.create_contact()
-            elif choice == 2:
+            elif choice == '2':
                 self.find_contact()
-            elif choice == 3:
+            elif choice == '3':
                 print('введите ID контакты')
                 contact_id = input()
                 self.edit_contact(contact_id)
-            elif choice == 4:
+            elif choice == '4':
                 print('введите ID контакты')
                 contact_id = input()
                 self.delete_contact(contact_id)
-            elif choice == 5:
+            elif choice == '5':
                 self.export_csv()
-            elif choice == 6:
+            elif choice == '6':
                 self.import_csv()
-            elif choice == 7:
+            elif choice == '7':
                 print('выход из программы')
                 break
             else:
