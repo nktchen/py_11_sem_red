@@ -1,4 +1,4 @@
-import datetime, json, uuid
+import json, uuid
 import pandas as pd
 
 class Task:
@@ -33,9 +33,7 @@ class TasksManagement:
             return []
 
     def save_tasks(self, tasks):
-        dict_tasks = []
-        for task in tasks:
-            dict_tasks.append(task.__dict__())
+        dict_tasks = [task.__dict__() for task in tasks]
         with open(self.tasks_file, 'w') as file:
             json.dump(dict_tasks, file)
 

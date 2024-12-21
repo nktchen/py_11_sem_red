@@ -29,9 +29,7 @@ class NotesManagement:
             return []
 
     def save_notes(self, notes):
-        dict_notes = []
-        for note in notes:
-            dict_notes.append(note.__dict__())
+        dict_notes = [note.__dict__() for note in notes]
         with open(self.notes_file, 'w') as file:
             json.dump(dict_notes, file)
 

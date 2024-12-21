@@ -1,8 +1,10 @@
 from classes.Note import NotesManagement
 from classes.Task import TasksManagement
+from classes.Contact import ContactsManagement
 
 Notes = NotesManagement("notes.json")
 Tasks = TasksManagement("tasks.json")
+Contacts = ContactsManagement('contacts.json')
 
 def manage_contacts():
     return
@@ -28,7 +30,7 @@ while True:
     elif choice == 2:
         Tasks.manage_tasks()
     elif choice == 3:
-        manage_contacts()
+        Contacts.manage_contacts()
     elif choice == 4:
         manage_finances()
     elif choice == 5:
